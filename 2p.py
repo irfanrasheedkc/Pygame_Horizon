@@ -1,6 +1,7 @@
 #import pygame library
 import pygame,sys,random,math,os
 from tkinter import messagebox
+import threading
 import time
 pygame.init()
 
@@ -8,7 +9,7 @@ def wait_and_change_var():
     global player1_frozen
     global player2_frozen
 
-    time.sleep(3)
+    time.sleep(3000)
     player1_frozen = False
     player2_frozen = False
     return 
@@ -149,7 +150,7 @@ pygame.display.set_icon(icon)
 # ice block
 icespeed=1
 iceimage=pygame.image.load("./media/images/ice.png").convert_alpha()
-iceimage=pygame.transform.scale(iceimage,(50,50))
+iceimage=pygame.transform.scale(iceimage,(75,75))
 ice=iceimage.get_rect(topleft=(random.randint(10,screenwidth-10),0))
 iceinitial=pygame.time.get_ticks()
 icetime=5000
