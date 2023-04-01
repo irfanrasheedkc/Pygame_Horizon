@@ -40,8 +40,8 @@ root.iconphoto(False, image1)
 poppins_font = font.Font(family='Poppins', size=50, weight="bold")
 label1 = Label(root, text="JK PING PONG", font=poppins_font,fg="white", bg="black").pack()
 
-img = ImageTk.PhotoImage(Image.open("./media/images/imagenew2.jpg"))
-imagelabel = Label(root, image=img)
+img=ImageTk.PhotoImage(Image.open("./media/images/imagenew2.jpg"))
+imagelabel=Label(root,image=img)
 imagelabel.pack()
 
 label2 = Label(root, text="\n\n\tABOUT THE GAME :-",font=("Poppins", 20, "bold"), bg="black", fg="orange").pack(anchor="w")
