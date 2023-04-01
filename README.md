@@ -31,8 +31,8 @@ Overall, this Ping Pong game is an exciting and engaging project that showcases 
 2. Embed video of project demo
 ## Libraries used
 - tkinter
-- PIL
-- pygame
+- PIL==9.4.0
+- pygame==2.1.2
 
 ## How to configure
 Instructions for setting up project
