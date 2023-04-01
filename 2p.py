@@ -121,7 +121,7 @@ def iceanimation():
     ice.y+=icespeed
     screen.blit(iceimage,(ice.x,ice.y))
     if ((icefinal-iceinitial)>icetime):
-        icetime+=icetime
+        icetime+=5000
         ice.x=random.randint(10,screenwidth-10)
         ice.y=0
         ice.y+=icespeed
@@ -150,9 +150,9 @@ pygame.display.set_icon(icon)
 icespeed=1
 iceimage=pygame.image.load("./media/images/ice.png").convert_alpha()
 iceimage=pygame.transform.scale(iceimage,(75,75))
-ice=iceimage.get_rect(topleft=(random.randint(10,screenwidth-10),0))
+ice=iceimage.get_rect(topleft=(random.randint(400,screenwidth-400),0))
 iceinitial=pygame.time.get_ticks()
-icetime=5000
+icetime=3000
 
 #colours
 bgcolor=(144,238,144)
@@ -241,7 +241,7 @@ while True:
         #         player2speed+=speed    
 
         if player1_frozen:
-            pass
+            continue
         else:
             #configuring buttons
             if event.type==pygame.KEYDOWN:
@@ -256,7 +256,7 @@ while True:
                     player1speed+=speed 
 
         if player2_frozen:
-            pass
+            continue
         else:        
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_DOWN:
@@ -282,12 +282,13 @@ while True:
             if ballspeedx > 0:
                 # freeze player 1
                 player1_frozen = True
-            else:
+            if ballspeedx < 0:
                 # freeze player 2
                 player2_frozen = True
 
                     # create a new thread
             t = threading.Thread(target=wait_and_change_var)
+            t.daemon = True
             flag_freeze = 1
             # start the thread
             t.start()
