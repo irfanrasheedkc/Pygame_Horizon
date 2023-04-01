@@ -100,7 +100,21 @@ def display2win():
         #sys.quit() 
         #os.system("python jkpingpong.py") 
         # messagebox.showinfo("Message","THANK YOU FOR PLAYING")
-        pygame.quit()           
+        pygame.quit()  
+     
+def iceanimation():
+    global ice,icetime
+    icefinal=pygame.time.get_ticks()
+    ice.y+=icespeed
+    screen.blit(iceimage,(ice.x,ice.y))
+    if ((icefinal-iceinitial)>icetime):
+        icetime+=icetime
+        ice.x=random.randint(10,screenwidth-10)
+        ice.y=0
+        ice.y+=icespeed
+
+    
+                    
 
 pygame.mixer.pre_init(44100,-16,2,512)
 
@@ -112,6 +126,7 @@ clock=pygame.time.Clock()
 screenwidth=1200
 screenheight=700
 screen=pygame.display.set_mode((screenwidth,screenheight)) 
+screen.set_alpha(None)
 
 #name for window
 name=pygame.display.set_caption("Ping Pong Game")
@@ -119,6 +134,14 @@ name=pygame.display.set_caption("Ping Pong Game")
 #icon for game
 icon=pygame.image.load("./media/images/image.jpg")
 pygame.display.set_icon(icon)
+
+# ice block
+icespeed=1
+iceimage=pygame.image.load("./media/images/ice.png").convert_alpha()
+iceimage=pygame.transform.scale(iceimage,(50,50))
+ice=iceimage.get_rect(topleft=(random.randint(10,screenwidth-10),0))
+iceinitial=pygame.time.get_ticks()
+icetime=5000
 
 #colours
 bgcolor=(144,238,144)
@@ -238,7 +261,11 @@ while True:
     playername2text=scorefont.render("Player 2",False,scorecolor)   
     screen.blit(playername2text,(screenwidth/2+20,screenheight/2-20))
     
-    pygame.draw.ellipse(screen,ballcolor,ball) 
+    pygame.draw.ellipse(screen,ballcolor,ball)
+    
+    iceanimation() 
+    
+    ice.y+=icespeed
            
     if win1time:
         display1win()
@@ -250,4 +277,4 @@ while True:
                    
     #updating window       
     pygame.display.flip() 
-    clock.tick(144)            
+    clock.tick(100)            
