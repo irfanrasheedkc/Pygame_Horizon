@@ -32,7 +32,7 @@ root.configure(bg="black")
 image1=PhotoImage(file="./media/images/tkimage.png")
 root.iconphoto(False,image1)
 
-label1=Label(root,text="JK PING PONG",font=("algerian",50),fg="red",bg="black").pack()
+label1=Label(root,text="\nPING PONG",font=("algerian",50),fg="red",bg="black").pack()
 
 img=ImageTk.PhotoImage(Image.open("./media/images/imagenew2.jpg"))
 imagelabel=Label(root,image=img)
