@@ -10,10 +10,10 @@ r.set("1")
 
 def startgame(number):
     if number==1:
-        root.destroy() 
+        # root.destroy() 
         os.system("python cpu.py")
     if number==2:
-        root.destroy() 
+        # root.destroy() 
         os.system("python 2p.py")       
  
 def quitgame():
