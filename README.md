@@ -30,20 +30,9 @@ Overall, this Ping Pong game is an exciting and engaging project that showcases 
 7. At the end of the game, the winner is announced, and the players can choose to play again or exit the game.
 2. Embed video of project demo
 ## Libraries used
-from tkinter import *
-
-from tkinter import messagebox
-
-from tkinter import font
-
-from PIL import ImageTk, Image
-
-import os
-
-import pygame,sys,random,math
-
-from tkinter import messagebox
-
+tkinter
+PIL
+pygame
 
 ## How to configure
 Instructions for setting up project
