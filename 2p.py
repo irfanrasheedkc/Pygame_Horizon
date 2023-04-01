@@ -9,9 +9,7 @@ def wait_and_change_var():
     global player1_frozen
     global player2_frozen
     global flag_freeze
-    print("Sleeping")
     time.sleep(3)
-    print("Done")
     player1_frozen = False
     player2_frozen = False
     flag_freeze = 0
@@ -212,7 +210,6 @@ flag_freeze = 0
 
 #run the window
 while True:
-    print(player1_frozen , player2_frozen)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             #pygame.quit()
