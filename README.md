@@ -31,20 +31,34 @@ Overall, this Ping Pong game is an exciting and engaging project that showcases 
 2. Embed video of project demo
 ## Libraries used
 from tkinter import *
+
 from tkinter import messagebox
+
 from tkinter import font
+
 from PIL import ImageTk, Image
+
 import os
+
 import pygame,sys,random,math
+
 from tkinter import messagebox
+
 
 ## How to configure
 Instructions for setting up project
+
 1.Clone this repistory into your system.
+
 
 ## How to Run
 Instructions for running
+
 1.execute the file pingpong.py
+
 2.On the Menu,select the mode,CPU or 2 Player.
+
 3.Then click on 'START GAME' to start the game.
+
 4.Click on 'QUIT GAME' to exit.
+
