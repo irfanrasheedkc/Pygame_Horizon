@@ -11,7 +11,7 @@ Overall, this Ping Pong game is an exciting and engaging project that showcases 
 ## Team members
 1. Irfan Rasheed [https://github.com/irfanrasheedkc]
 2. Jayakanth Arun [https://github.com/JAYAKANTHARUN]
-3. Abhiram Krishna [https://github.com/Abhiramks2003]
+3. Abhiram Krishna S [https://github.com/Abhiramks2003]
 ## Link to product walkthrough
 [link to video]
 ## How it Works ?
