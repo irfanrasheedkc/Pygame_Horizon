@@ -1,6 +1,3 @@
-from tkinter import *
-from tkinter import messagebox
-from tkinter import font
-from PIL import ImageTk, Image
-import os
-import pygame,sys,random,math
+tkinter
+PIL
+pygame
