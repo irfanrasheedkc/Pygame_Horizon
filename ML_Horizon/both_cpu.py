@@ -1,3 +1,14 @@
+import openpyxl
+
+# Load the Excel file
+workbook = openpyxl.load_workbook('example.xlsx')
+
+# Select the sheet where you want to append data
+worksheet = workbook['Sheet1']
+
+# Define the data you want to append as a list
+data_to_append = []
+
 #import pygame library
 import pygame,sys,random,math,os
 from tkinter import messagebox
@@ -18,7 +29,16 @@ def aianimation():
     if player2.top<=10:
         player2.top=10
     if player2.bottom>=screenheight-10:                
-        player2.bottom=screenheight-10        
+        player2.bottom=screenheight-10      
+    
+    if player1.top<ball.y:
+        player1.top+=speed
+    if player1.bottom>ball.y:
+        player1.bottom-=speed
+    if player1.top<=10:
+        player1.top=10
+    if player1.bottom>=screenheight-10:                
+        player1.bottom=screenheight-10      
 
 #ball animation
 def ballanimation():
@@ -30,25 +50,28 @@ def ballanimation():
     
     #bounce back and regeneration
     if ball.top<=10 or ball.bottom>=screenheight-10:
-        pygame.mixer.Sound.play(pongsound)
+        #pygame.mixer.Sound.play(pongsound)
         ballspeedy*=-1
+
     if ball.left<=10:
-        pygame.mixer.Sound.play(scoresound)
-        player2score+=1 
-        if player2score==winscore:
-            win2time=pygame.time.get_ticks()#return present time in milliseconds
-        scoretime=pygame.time.get_ticks()
+        #pygame.mixer.Sound.play(scoresound)
+        ballspeedx*=-1
+        # player2score+=1 
+        # if player2score==winscore:
+        #     win2time=pygame.time.get_ticks()#return present time in milliseconds
+        # scoretime=pygame.time.get_ticks()
         
     if ball.right>=screenwidth-10:
-        pygame.mixer.Sound.play(scoresound)
-        player1score+=1  
-        if player1score==winscore:
-            win1time=pygame.time.get_ticks()  
-        scoretime=pygame.time.get_ticks()
+        #pygame.mixer.Sound.play(scoresound)
+        ballspeedx*=-1
+        # player1score+=1  
+        # if player1score==winscore:
+        #     win1time=pygame.time.get_ticks()  
+        # scoretime=pygame.time.get_ticks()
         
     #collide with player
     if ball.colliderect(player2) and ballspeedx>0:
-        pygame.mixer.Sound.play(pongsound)
+        #pygame.mixer.Sound.play(pongsound)
         if abs(ball.right-player2.left)<10:
             ballspeedx*=-1          
         elif abs(ball.bottom-player2.top)<10 and ballspeedy>0:
@@ -56,7 +79,7 @@ def ballanimation():
         elif abs(ball.top-player2.bottom)<10 and ballspeedy<0:
             ballspeedy*=-1    
     if ball.colliderect(player1) and ballspeedx<0: 
-        pygame.mixer.Sound.play(pongsound)
+       #pygame.mixer.Sound.play(pongsound)
         if abs(ball.left-player1.right)<10:
             ballspeedx*=-1          
         elif abs(ball.bottom-player1.top)<10 and ballspeedy>0:
@@ -91,7 +114,7 @@ def display1win():
        # pygame.quit()
         #sys.quit()
         #os.system("python jkpingpong.py") 
-        # messagebox.showinfo("Message","THANK YOU FOR PLAYING")
+        messagebox.showinfo("Message","THANK YOU FOR PLAYING")
         pygame.quit()   
         
       
@@ -107,7 +130,7 @@ def display2win():
         #pygame.quit()
         #sys.quit() 
         #os.system("python jkpingpong.py") 
-        # messagebox.showinfo("Message","THANK YOU FOR PLAYING")  
+        messagebox.showinfo("Message","THANK YOU FOR PLAYING")  
         pygame.quit()   
 
 pygame.mixer.pre_init(44100,-16,2,512)
@@ -125,7 +148,7 @@ screen=pygame.display.set_mode((screenwidth,screenheight))
 name=pygame.display.set_caption("Ping Pong Game")
 
 #icon for game
-icon=pygame.image.load("./media/images/image.jpg")
+icon=pygame.image.load("image.jpg")
 pygame.display.set_icon(icon)
 
 #colours
@@ -146,12 +169,12 @@ player1=pygame.Rect(10, screenheight / 2 - 70,10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70,10,120) 
 
 #speed 
-ballspeed=5
+ballspeed=30
 ballspeedx=ballspeed * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
 ballspeedy=ballspeed * random.choice((1,-1))
 player1speed=0
 player2speed=0
-speed=5
+speed=30
 
 #score details
 player1score=0
@@ -175,9 +198,13 @@ winscore=5
 aimfont=pygame.font.SysFont("algerian",25)
 
 #sound
-pongsound=pygame.mixer.Sound("./media/sounds/pong.wav")
-scoresound=pygame.mixer.Sound("./media/sounds/score.wav")
+#pongsound=pygame.mixer.Sound("pong.ogg")
+#wscoresound=pygame.mixer.Sound("score.ogg")
 
+flag = 1
+
+initial_x = 15
+count = 0
 
 #run the window
 while True:
@@ -186,21 +213,57 @@ while True:
             
             #sys.quit()
             #os.system("python jkpingpong.py") 
-            # messagebox.showinfo("Message","THANK YOU FOR PLAYING")
+            messagebox.showinfo("Message","THANK YOU FOR PLAYING")
             pygame.quit()  
+
+            # Iterate over the data and append each row to the sheet
+            for row in data_to_append:
+                worksheet.append(row)
+
+            # Save the changes to the Excel file
+            workbook.save('example.xlsx')
         
-        #configuring buttons
-        if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_s:
-                player1speed+=speed
-            if event.key==pygame.K_w:
-                player1speed-=speed
-        if event.type==pygame.KEYUP:
-            if event.key==pygame.K_s:
-                player1speed-=speed
-            if event.key==pygame.K_w:
-                player1speed+=speed   
-    
+        # #configuring buttons
+        # if event.type==pygame.KEYDOWN:
+        #     if event.key==pygame.K_s:
+        #         player1speed+=speed
+        #     if event.key==pygame.K_w:
+        #         player1speed-=speed
+        # if event.type==pygame.KEYUP:
+        #     if event.key==pygame.K_s:
+        #         player1speed-=speed
+        #     if event.key==pygame.K_w:
+        #         player1speed+=speed   
+
+
+    if flag==1:
+        if ballspeedx>0 and ball.x<initial_x+20 and initial_x-20<ball.x:
+            count+=1
+            if ballspeedy>0:
+                by = 1
+            else:
+                by = 0
+            data = [ball.x , ball.y , by, -1]
+            temp_x = ball.x
+            flag = 0
+
+    if(count>=5):
+        count = 0
+        if initial_x>=screenwidth-100:
+            initial_x = 15
+        else:
+            initial_x += 20
+
+    if flag==0:
+        if ball.x>=screenwidth-100:
+            if temp_x<ball.x:
+                temp_x = ball.x
+            else:
+                flag = 1
+                data[3] = ball.y
+                data_to_append.append(data)
+                print(len(data_to_append))
+
     player1.y+=player1speed
     player2.y+=player2speed
     
@@ -249,4 +312,4 @@ while True:
                    
     #updating window       
     pygame.display.flip() 
-    clock.tick(144)            
+    clock.tick(60)            

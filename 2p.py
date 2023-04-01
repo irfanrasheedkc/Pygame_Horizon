@@ -117,7 +117,7 @@ screen=pygame.display.set_mode((screenwidth,screenheight))
 name=pygame.display.set_caption("Ping Pong Game")
 
 #icon for game
-icon=pygame.image.load("image.jpg")
+icon=pygame.image.load("./media/images/image.jpg")
 pygame.display.set_icon(icon)
 
 #colours
@@ -167,8 +167,8 @@ winscore=5
 aimfont=pygame.font.SysFont("algerian",25)
 
 #sound
-pongsound=pygame.mixer.Sound("pong.wav")
-scoresound=pygame.mixer.Sound("score.wav")
+pongsound=pygame.mixer.Sound("./media/sounds/pong.wav")
+scoresound=pygame.mixer.Sound("./media/sounds/score.wav")
 
 
 #run the window
