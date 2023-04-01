@@ -8,10 +8,13 @@ pygame.init()
 def wait_and_change_var():
     global player1_frozen
     global player2_frozen
-
-    time.sleep(3000)
+    global flag_freeze
+    print("Sleeping")
+    time.sleep(3)
+    print("Done")
     player1_frozen = False
     player2_frozen = False
+    flag_freeze = 0
     return 
 
 #player animation
@@ -126,8 +129,6 @@ def iceanimation():
         ice.y+=icespeed
 
     
-                    
-
 pygame.mixer.pre_init(44100,-16,2,512)
 
 
@@ -207,9 +208,11 @@ scoresound=pygame.mixer.Sound("./media/sounds/score.wav")
 
 player1_frozen = False
 player2_frozen = False
+flag_freeze = 0
 
 #run the window
 while True:
+    print(player1_frozen , player2_frozen)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             #pygame.quit()
@@ -277,17 +280,20 @@ while True:
     playeranimation()
 
     if ball.colliderect(ice):
-        if ballspeedx > 0:
-            # freeze player 1
-            player1_frozen = True
-        else:
-            # freeze player 2
-            player2_frozen = True
+        if flag_freeze==0:
+            print("Collision")
+            if ballspeedx > 0:
+                # freeze player 1
+                player1_frozen = True
+            else:
+                # freeze player 2
+                player2_frozen = True
 
-                # create a new thread
-        t = threading.Thread(target=wait_and_change_var)
-        # start the thread
-        t.start()
+                    # create a new thread
+            t = threading.Thread(target=wait_and_change_var)
+            flag_freeze = 1
+            # start the thread
+            t.start()
 
     #drawing objects and Lines        
     screen.fill(bgcolor)        
