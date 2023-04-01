@@ -1,6 +1,7 @@
 #import pygame library
 import pygame,sys,random,math,os
 from tkinter import messagebox
+pygame.init()
 
 #player animation
 def playeranimation():
@@ -118,7 +119,7 @@ def iceanimation():
 
 pygame.mixer.pre_init(44100,-16,2,512)
 
-pygame.init()
+
 
 clock=pygame.time.Clock()
 
@@ -193,6 +194,8 @@ aimfont=pygame.font.SysFont("algerian",25)
 pongsound=pygame.mixer.Sound("./media/sounds/pong.wav")
 scoresound=pygame.mixer.Sound("./media/sounds/score.wav")
 
+player1_frozen = False
+player2_frozen = False
 
 #run the window
 while True:
@@ -204,36 +207,74 @@ while True:
             # messagebox.showinfo("Message","THANK YOU FOR PLAYING")
             pygame.quit()    
         
-        #configuring buttons
-        if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_s:
-                player1speed+=speed
-            if event.key==pygame.K_w:
-                player1speed-=speed
-        if event.type==pygame.KEYUP:
-            if event.key==pygame.K_s:
-                player1speed-=speed
-            if event.key==pygame.K_w:
-                player1speed+=speed 
-                
-        if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_DOWN:
-                player2speed+=speed
-            if event.key==pygame.K_UP:
-                player2speed-=speed 
-        if event.type==pygame.KEYUP:
-            if event.key==pygame.K_DOWN:
-                player2speed-=speed
-            if event.key==pygame.K_UP:
-                player2speed+=speed    
+        # if event.type==pygame.KEYDOWN:
+        #     if event.key==pygame.K_s:
+        #         player1speed+=speed
+        #     if event.key==pygame.K_w:
+        #         player1speed-=speed
+        # if event.type==pygame.KEYUP:
+        #     if event.key==pygame.K_s:
+        #         player1speed-=speed
+        #     if event.key==pygame.K_w:
+        #         player1speed+=speed 
     
+        # if event.type==pygame.KEYDOWN:
+        #     if event.key==pygame.K_DOWN:
+        #         player2speed+=speed
+        #     if event.key==pygame.K_UP:
+        #         player2speed-=speed 
+        # if event.type==pygame.KEYUP:
+        #     if event.key==pygame.K_DOWN:
+        #         player2speed-=speed
+        #     if event.key==pygame.K_UP:
+        #         player2speed+=speed    
+
+        if player1_frozen:
+            pass
+        else:
+            #configuring buttons
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_s:
+                    player1speed+=speed
+                if event.key==pygame.K_w:
+                    player1speed-=speed
+            if event.type==pygame.KEYUP:
+                if event.key==pygame.K_s:
+                    player1speed-=speed
+                if event.key==pygame.K_w:
+                    player1speed+=speed 
+
+        if player2_frozen:
+            pass
+        else:        
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_DOWN:
+                    player2speed+=speed
+                if event.key==pygame.K_UP:
+                    player2speed-=speed 
+            if event.type==pygame.KEYUP:
+                if event.key==pygame.K_DOWN:
+                    player2speed-=speed
+                if event.key==pygame.K_UP:
+                    player2speed+=speed    
+
     player1.y+=player1speed
     player2.y+=player2speed
     
     ballanimation()
     
     playeranimation()
-    
+
+    if ball.colliderect(ice):
+        if ballspeedx > 0:
+            # freeze player 1
+            player1_frozen = True
+        else:
+            # freeze player 2
+            player2_frozen = True
+
+
+
     #drawing objects and Lines        
     screen.fill(bgcolor)        
     pygame.draw.rect(screen,player1color,player1)
