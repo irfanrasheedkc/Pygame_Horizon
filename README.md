@@ -30,8 +30,24 @@ Overall, this Ping Pong game is an exciting and engaging project that showcases 
 7. At the end of the game, the winner is announced, and the players can choose to play again or exit the game.
 2. Embed video of project demo
 ## Libraries used
-Library Name - Version
+tkinter
+PIL
+pygame
+
 ## How to configure
 Instructions for setting up project
+
+1.Clone this repistory into your system.
+
+
 ## How to Run
 Instructions for running
+
+1.execute the file pingpong.py
+
+2.On the Menu,select the mode,CPU or 2 Player.
+
+3.Then click on 'START GAME' to start the game.
+
+4.Click on 'QUIT GAME' to exit.
+

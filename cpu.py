@@ -1,6 +1,15 @@
 #import pygame library
 import pygame,sys,random,math,os
 from tkinter import messagebox
+import threading
+
+# define a function that will be executed in a separate thread
+def wait_and_change_var():
+    global my_var
+    # wait for 3 seconds
+    time.sleep(3)
+    # change the value of the variable
+    my_var = 1
 
 #player animation
 def playeranimation():
