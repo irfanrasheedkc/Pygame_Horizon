@@ -1,7 +1,17 @@
 #import pygame library
 import pygame,sys,random,math,os
 from tkinter import messagebox
+import time
 pygame.init()
+
+def wait_and_change_var():
+    global player1_frozen
+    global player2_frozen
+
+    time.sleep(3)
+    player1_frozen = False
+    player2_frozen = False
+    return 
 
 #player animation
 def playeranimation():
@@ -273,7 +283,10 @@ while True:
             # freeze player 2
             player2_frozen = True
 
-
+                # create a new thread
+        t = threading.Thread(target=wait_and_change_var)
+        # start the thread
+        t.start()
 
     #drawing objects and Lines        
     screen.fill(bgcolor)        
